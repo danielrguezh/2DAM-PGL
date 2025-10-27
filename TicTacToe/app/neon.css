@@ -1,0 +1,89 @@
+body {
+  background: radial-gradient(circle at center, #05060a, #000);
+  color: white;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.status {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  position: relative;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.square:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.neon-x line {
+  stroke: #36a3ff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px #36a3ff) drop-shadow(0 0 12px #36a3ff);
+  stroke-dasharray: 85;
+  stroke-dashoffset: 85;
+  animation: draw 0.4s ease forwards;
+}
+
+.neon-o circle {
+  stroke: #ff4d4d;
+  stroke-width: 10;
+  fill: none;
+  filter: drop-shadow(0 0 6px #ff4d4d) drop-shadow(0 0 12px #ff4d4d);
+  stroke-dasharray: 188;
+  stroke-dashoffset: 188;
+  animation: draw 0.5s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Winning line */
+.win-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.win-line line {
+  stroke-width: 0.1;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 16px currentColor);
+  stroke-dasharray: 3;
+  stroke-dashoffset: 3;
+  animation: winGlow 0.7s linear forwards;
+}
+
+@keyframes winGlow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
