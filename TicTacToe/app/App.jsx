@@ -17,7 +17,7 @@ export default function App() {
   const [winner, setWinner] = useState(null);
   const [winLine, setWinLine] = useState(null);
 
-  // Animación del fondo
+  // Animación del fondo (Color pelo de Cesar)
   const bgAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
