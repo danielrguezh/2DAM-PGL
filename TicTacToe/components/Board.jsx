@@ -19,7 +19,7 @@ export default function Board({ squares, xIsNext, onPlay, winner, winLine }) {
         <Square key={i} value={val} onPress={() => handlePress(i)} />
       ))}
       {winner && (
-        <WinningLine line={winLine} color={winner === "X" ? "#36a3ff" : "#ff4d4d"} />
+        <WinningLine line={winLine} color="#28a745" />
       )}
     </View>
   );
