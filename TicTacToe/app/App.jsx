@@ -20,7 +20,7 @@ export default function App() {
   const [score, setScore] = useState({ X: 0, O: 0 });
   const [message, setMessage] = useState("");
 
-  // 🎨 Animación del fondo
+  //  Animación del fondo
   const bgAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
