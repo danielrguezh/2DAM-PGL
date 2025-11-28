@@ -7,39 +7,61 @@ export default function Login() {
   const { login, token } = useContext(AuthContext);
   const [expenses, setExpenses] = useState([
     {
-      id: "e.id",
+      id: "e.id1",
       desc: "e.description",
       amount: "e.amount",
       paid_by: "e.paid_by",
+
+    }, {
+      id: "e.id2",
+      desc: "e.description",
+      amount: "e.amount",
+      paid_by: "e.paid_by",
+
+    }, {
+      id: "e.id3",
+      desc: "e.description",
+      amount: "e.amount",
+      paid_by: "e.paid_by",
+
     },
   ]);
   const router = useRouter();
 
-  const handleDelete = (id: String) => {
-      console.log("Borro el id: "+id);
-      for (let index = 0; index < expenses.length; index++) {
-        console.log(expenses[index]);
-        if (expenses[index].id == id){
-          expenses.splice(index,1);
-          let newExpenses = [...expenses];
-          setExpenses(newExpenses);
-        }
+  const handleDelete = (id: string) => {
+    console.log(`Borro el id : ${id}`);
+    for (let i = 0; i < expenses.length; i++) {
+      console.log(expenses[i]);
+      if (expenses[i].id == id) {
+        expenses.splice(i, 1);
+        setExpenses([...expenses]);
       }
-    };
+    }
+    Alert.alert("Voy a borrar.");
+  };
 
-  const handleEdit = () => {
-    Alert.alert("Voy a edit");
+  const handleEdit = (id: string) => {
+    for (let i = 0; i < expenses.length; i++) {
+      const element = expenses[i];
+      if (element.id == id) {
+        Alert.alert(`${element.amount} - ${element.desc}`)
+      }
+    }
+    Alert.alert("Voy a editar.");
+  };
+
+  const handleChange = (index: number, field: string, text: string) => {
+
   };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", padding: 20 }}>
       <Text>Mi grupo</Text>
-      {expenses.map((e) => (
+      {expenses.map((e, index) => (
         <View key={e.id}>
-          <Text
-            onPress={() => router.replace("/groupdetail")}
-          >{`Precio: ${e.amount} - ${e.desc}`}</Text>
-          <Button title="Editar" onPress={handleEdit} />
+          <TextInput keyboardType="number-pad" onChangeText={(text) => handleChange(index, "amount", text)}>{e.amount}</TextInput>
+          <TextInput>{e.desc}</TextInput>
+          <Button title="Actualizar" onPress={() => handleEdit(e.id)} />
           <Button title="Borrar" onPress={() => handleDelete(e.id)} />
         </View>
       ))}

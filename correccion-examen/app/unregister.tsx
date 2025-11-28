@@ -1,21 +1,21 @@
 import { useRouter } from "expo-router";
 import React, { useContext, useState } from "react";
-import { Alert, Button, Text, TextInput, View } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Login() {
-  const { login, token } = useContext(AuthContext);
+export default function Register() {
+  const { register } = useContext(AuthContext);
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async () => {
-    const res = await login(username, password);
-    if (res.access_token) {
-      router.replace("/");
+  const handleRegister = async () => {
+    const res = await register(username, password);
+    if (res.ok) {
+      router.replace("/login");
     } else {
-      setError(res.msg || "Login fallido");
+      setError(res.msg || "Error al registrar");
     }
   };
 
@@ -35,8 +35,8 @@ export default function Login() {
         style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
       />
       {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
-      <Button title="Login" onPress={handleLogin} />
-      <Button title="Registrarse" onPress={() => router.push("/register")} />
+      <Button title="Registrar" onPress={handleRegister} />
+      <Button title="Volver al login" onPress={() => router.push("/login")} />
     </View>
   );
 }
