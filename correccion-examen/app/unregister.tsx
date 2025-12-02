@@ -3,19 +3,19 @@ import React, { useContext, useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Register() {
-  const { register } = useContext(AuthContext);
+export default function Login() {
+  const { unregister } = useContext(AuthContext);
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = async () => {
-    const res = await register(username, password);
+  const handleUnregister = async () => {
+    const res = await unregister(username, password);
     if (res.ok) {
       router.replace("/login");
     } else {
-      setError(res.msg || "Error al registrar");
+      setError(res.msg || "No se pudo eliminar la cuenta");
     }
   };
 
@@ -35,8 +35,8 @@ export default function Register() {
         style={{ borderWidth: 1, marginBottom: 10, padding: 8 }}
       />
       {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
-      <Button title="Registrar" onPress={handleRegister} />
-      <Button title="Volver al login" onPress={() => router.push("/login")} />
+      <Button color="red" title="Borrar Cuenta" onPress={handleUnregister} />
+      <Button title="Cancelar" onPress={() => router.push("/")} />
     </View>
   );
 }
